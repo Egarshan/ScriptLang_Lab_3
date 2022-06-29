@@ -43,7 +43,7 @@ print "\n\nSuspicious requests:\n\n"
 warn_rx1 = /^(.+)"(GET|POST)/
 warn_rx2 = /^(.+)"(.+)(x\d\d)"/
 warn_rx3 = /^(.+)(\d+)(.+)"-" "-"$/
-warn_rx4 = /(\d+).(\d+)"$/
+warn_rx4 = /^(.+)(https|http){1}:\/\/[-a-zA-Z0-9+]+\.([-a-z]{2,3})(\/[-a-zA-Z0-9"-"]+){0,5}/
 warn_rx5 = /^(.+)"(GET|POST)\s\/\w\s/
 
 File.readlines(acces_file).each do |line|
@@ -67,6 +67,7 @@ File.readlines(acces_file).each do |line|
 
 	if line.match(warn_rx5)
 		warning_count += 1
+		print line
 	end
 
 	if warning_count >= 2
